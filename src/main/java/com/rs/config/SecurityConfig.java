@@ -11,10 +11,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain( HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.oauth2ResourceServer(r -> {
-            r.jwt().jwkSetUri("http://localhost:8080/oauth2/jwks")
-            .jwtAuthenticationConverter(new CustomJwtAuthenticationTokenConverter());
-        });
+        httpSecurity.oauth2ResourceServer(r -> r.jwt().jwkSetUri("http://localhost:8080/oauth2/jwks")
+        .jwtAuthenticationConverter(new CustomJwtAuthenticationTokenConverter()));
         httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
         return httpSecurity.build();
     }
